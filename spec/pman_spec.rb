@@ -8,7 +8,8 @@ RSpec.describe Pman do
   describe '.generate()' do
     it 'generates' do
       expect(Pman).to receive(:generate_password).and_call_original
-      expect(Pman.generate).to_not be_nil
+      expect(Pman).to receive(:persist_password).and_call_original
+      expect(Pman.generate('fb')).to_not be_nil
     end
   end
 
@@ -39,6 +40,17 @@ RSpec.describe Pman do
     it 'composes of alphanumeric + special characters' do
       length = 10
       expect(Pman.generate_password(length).size).to eq(length)
+    end
+  end
+
+  describe '.persist_password()' do
+    it 'persists' do
+      app, password = 'fb', 'abc123+-'
+
+      Pman.persist_password(app, password)
+      passwords = YAML.load_file('passwords.yml')
+
+      expect(passwords[app]).to eq(password)
     end
   end
 end
