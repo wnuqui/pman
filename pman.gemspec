@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["dofreewill22@gmail.com"]
 
   spec.summary       = 'Generate, save and retrieve passwords.'
-  spec.description   = 'Allows user to generate, save and retrieve passwords. Only master password must be remembered by the user.'
+  spec.description   = 'Allows user to generate, save and retrieve passwords.'
   spec.homepage      = 'http://home.page'
   spec.license       = "MIT"
 
@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler", "~> 1.14"
+  spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
 end
