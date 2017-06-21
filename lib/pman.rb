@@ -1,9 +1,13 @@
 require "pman/version"
+require 'yaml'
 
 module Pman
+  PASSWORD_PATH = 'passwords.yml'
+
   class << self
-    def generate(length=8)
-      generate_password(length)
+    def generate(app, length=8)
+      password = generate_password(length)
+      persist_password app, password
     end
 
     def generate_password(length=8)
@@ -18,6 +22,15 @@ module Pman
       str += ['-', '_', '!', '+', '*'].shuffle[0, 2].join
 
       str.split('').shuffle[0, length].join
+    end
+
+    def persist_password(app, password)
+      config = YAML.load_file(PASSWORD_PATH) rescue {}
+      config[app] = password
+
+      File.open('passwords.yml','w+') do |passwords|
+         passwords.write config.to_yaml
+      end
     end
   end
 end
