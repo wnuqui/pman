@@ -7,9 +7,13 @@ RSpec.describe Pman do
 
   describe '.generate()' do
     it 'generates' do
-      expect(Pman).to receive(:generate_password).and_call_original
+      app, password = 'fb', '123pass+'
+      expect(Pman).to receive(:generate_password).and_return(password)
       expect(Pman).to receive(:persist_password).and_call_original
-      expect(Pman.generate('fb')).to_not be_nil
+
+      Pman.generate app
+
+      expect(Pman.retrieve_password(app)).to eq(password)
     end
   end
 
