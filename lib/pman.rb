@@ -3,6 +3,10 @@ require "pman/version"
 module Pman
   class << self
     def generate(length=8)
+      generate_password(length)
+    end
+
+    def generate_password(length=8)
       s = 2                       # length of special chars
       a = n = (length - s) / 2    # length of alpha and numeric chars
 
