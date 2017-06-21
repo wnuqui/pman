@@ -32,5 +32,10 @@ module Pman
          passwords.write config.to_yaml
       end
     end
+
+    def retrieve_password(app)
+      config = YAML.load_file(PASSWORD_PATH) rescue {}
+      config[app]
+    end
   end
 end
