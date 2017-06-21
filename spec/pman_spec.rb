@@ -53,4 +53,15 @@ RSpec.describe Pman do
       expect(passwords[app]).to eq(password)
     end
   end
+
+  describe '.retrieve_password()' do
+    it 'retrieves' do
+      app, password = 'fb', 'abc123+-'
+
+      Pman.persist_password(app, password)
+      retrieved_password = Pman.retrieve_password(app)
+
+      expect(retrieved_password).to eq(password)
+    end
+  end
 end
